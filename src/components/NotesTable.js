@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {GetNotes } from '../services/notes';
+import {DeleteNote,GetNotes } from '../services/notes';
 import { Button } from 'react-bootstrap';
 
 export const NotesTable=()=>{
@@ -16,7 +16,11 @@ return <table className='table table-dark'>
         {
             notes.map(n =>
                 <tr key={n.id}>
-                   
+                
+                
+                  <td style={{ width:'3rem' }}>
+                      <Button className='btn btn-danger' onClick={()=> DeleteNote(dispatch,n)}>Delete</Button>
+                    </td>
                     <td style={{ textAlign: 'left' }}>{n.value}</td>
                 </tr>
             )

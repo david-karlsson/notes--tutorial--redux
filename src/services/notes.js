@@ -17,4 +17,19 @@ dispatch (ActionCreators.setNotes(response));
     catch{
         console.log("error!")
     }
+
+}
+
+    export const DeleteNote = async(dispatch,note) =>{
+
+        try{
+        
+    
+    dispatch (ActionCreators.deleteNote(note));
+    
+            }
+        catch{
+            console.log("error!")
+        }
+
 }
