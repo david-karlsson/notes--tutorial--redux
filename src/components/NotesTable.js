@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {DeleteNote,GetNotes } from '../services/notes';
 import { Button } from 'react-bootstrap';
+import {EditNoteModal} from './NoteModal'
 
 export const NotesTable=()=>{
     const notes = useSelector(state=>state.notesReducer.notes);
@@ -16,7 +17,10 @@ return <table className='table table-dark'>
         {
             notes.map(n =>
                 <tr key={n.id}>
-                
+                <td>
+                    <EditNoteModal note={n.value}/>
+
+                </td>
                 
                   <td style={{ width:'3rem' }}>
                       <Button className='btn btn-danger' onClick={()=> DeleteNote(dispatch,n)}>Delete</Button>

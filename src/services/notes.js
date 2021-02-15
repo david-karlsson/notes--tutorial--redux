@@ -18,18 +18,55 @@ dispatch (ActionCreators.setNotes(response));
         console.log("error!")
     }
 
-}
+    }
 
-    export const DeleteNote = async(dispatch,note) =>{
+        export const DeleteNote = async(dispatch,note) =>{
 
-        try{
-        
-    
-    dispatch (ActionCreators.deleteNote(note));
-    
-            }
-        catch{
-            console.log("error!")
+            try{
+            
+            
+            dispatch (ActionCreators.deleteNote(note));
+            
+                    }
+                catch{
+                    console.log("error!")
+                }
+
+
         }
 
-}
+
+
+            export const NewNote = async(dispatch,note) =>{
+
+                try{
+                    const response = {value:note, id:note};            
+                    dispatch (ActionCreators.newNote(response));
+                        
+                    }
+                            catch{
+                                console.log("error!");
+                            }
+            
+
+            }
+
+
+
+            export const EditNote = async(dispatch,note) =>{
+
+                try{
+                    const response = {value:note, id:1};
+                       
+                       
+            
+            
+                    dispatch (ActionCreators.editNote(response));
+                        
+                    }
+                            catch{
+                                console.log("error!");
+                            }
+            
+
+            }
