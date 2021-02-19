@@ -49,8 +49,9 @@ dispatch (ActionCreators.setNotes(data));
             export const NewNote = async(dispatch,note) =>{
 
                 try{
-                    const response = {value:note, id:note.id};            
-                    dispatch (ActionCreators.newNote(response));
+                    // const response = {value:note, id:note.id};   
+                    const { data } = await axiosInstance.post('', note)         
+                    dispatch(ActionCreators.newNote(data));
                         
                     }
                             catch{
@@ -65,12 +66,16 @@ dispatch (ActionCreators.setNotes(data));
             export const EditNote = async(dispatch,note) =>{
 
                 try{
-                    const response = {value:note, id:1};
+
+                    
+                    // const response = {value:note, id:1};
                        
                        
             
             
-                    dispatch (ActionCreators.editNote(response));
+                    await axiosInstance.put('', note);
+                    dispatch(ActionCreators.editNote(note));
+            
                         
                     }
                             catch{
