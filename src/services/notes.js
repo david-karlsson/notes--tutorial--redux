@@ -1,86 +1,49 @@
-import {ActionCreators} from '../redux/notesReducer';
+import { ActionCreators } from '../redux/notesReducer';
 import * as axios from 'axios';
+
+
 
 const axiosInstance = axios.create({
 
     baseURL:'https://localhost:44395/notes'
 })
 
-export const GetNotes = async(dispatch) =>{
-
-    try{
-
-    const {data} = await axiosInstance.get();
-
-    //     const response=[
-            
-    //         {value:"Study for exam..", id:1},
-    //         {value:"Soon I am master, too", id:2},
-    //         {value:"Build an app today, or so.", id:3},
-    // ]
-
-
-dispatch (ActionCreators.setNotes(data));
-
-        }
-    catch{
-        console.log("error!")
+export const GetNotes = async (dispatch) => {
+    try {
+        // api call
+        const { data } = await axiosInstance.get();
+        dispatch(ActionCreators.setNotes(data));
+    } catch {
+        console.log('Error!');
     }
+}
 
+export const DeleteNote = async (dispatch, note) => {
+    try {
+        // api call
+        await axiosInstance.delete(`/${note.id}`);
+        dispatch(ActionCreators.deleteNote(note));
+    } catch {
+        console.log('Error!');
     }
+}
 
-        export const DeleteNote = async(dispatch,note) =>{
+export const NewNote = async (dispatch, note) => {
+    try {
+        // api call
+        const { data } = await axiosInstance.post('', note)
+        dispatch(ActionCreators.newNote(data));
+    } catch {
+        console.log('Error!');
+    }
+}
 
-            try{
-                 await axiosInstance.delete(`/${note.id}`);
-            
-            dispatch (ActionCreators.deleteNote(note));
-            
-                    }
-                catch{
-                    console.log("error!")
-                }
-
-
-        }
-
-
-
-            export const NewNote = async(dispatch,note) =>{
-
-                try{
-                    // const response = {value:note, id:note.id};   
-                    const { data } = await axiosInstance.post('', note)         
-                    dispatch(ActionCreators.newNote(data));
-                        
-                    }
-                            catch{
-                                console.log("error!");
-                            }
-            
-
-            }
-
-
-
-            export const EditNote = async(dispatch,note) =>{
-
-                try{
-
-                    
-                    // const response = {value:note, id:1};
-                       
-                       
-            
-            
-                    await axiosInstance.put('', note);
-                    dispatch(ActionCreators.editNote(note));
-            
-                        
-                    }
-                            catch{
-                                console.log("error!");
-                            }
-            
-
-            }
+export const EditNote = async (dispatch, note) => {
+    try {
+        // api call
+        await axiosInstance.put('', note);
+        dispatch(ActionCreators.editNote(note));
+    } catch {
+        console.log('Error!');
+    }
+}
